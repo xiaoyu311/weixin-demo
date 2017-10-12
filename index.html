@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="../jquery.js"></script>
+    <style>
+        input{
+            width:170px;
+            height:15px;
+            vertical-align: middle;
+        }
+        .hint{
+            color:#666;
+        }
+        .hide{
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <form action="" method="get">
+        文本框：<input id="txt" type="text" name="account" placeholder="请输入帐号">
+        <hr>
+        密码框：
+
+        <span>
+            <input id="pwd" type="password" name="password" placeholder="请输入密码">
+            <input id="pwdSpan" type="text" placeholder="请输入密码">
+        </span>
+
+        <button type="submit" onclick="submit()">Submit</button>
+    </form>
+    <script src="http://libs.baidu.com/jquery/2.1.1/jquery.min.js"></script>
+    <!-- <script>
+        // $(function(){
+            // $("#pwdSpan").hide();
+            var ie = !-[1,];
+            alert(ie)
+        // })
+    </script> -->
+    <!-- [if lte IE 9]
+        <script>
+          $(function(){
+            var txtHolder=$("#txt").attr("placeholder");
+            var pwdHolder=$("#pwdSpan").attr("placeholder");
+            $("#txt").val(txtHolder).addClass("hint");
+            $("#pwdSpan").val(pwdHolder).addClass("hint").show();
+            $("#pwd").hide();
+            $("#txt").focus(function(){
+                if($(this).val() == txtHolder){
+                    $(this).val("").removeClass("hint");
+                }
+            }).blur(function(){
+                if($(this).val().trim() === ""){
+                    $(this).val(txtHolder).addClass("hint");
+                }
+            });
+
+            $("#pwdSpan").focus(function(){
+                $(this).css("display", "none");
+                $("#pwd").show().focus();
+            })
+
+            $("#pwd").blur(function(){
+                if($("#pwd").val().trim() == ""){
+                    $(this).hide();
+                    $("#pwdSpan").show();
+                }
+            })
+          })
+        </script>
+    ![endif] -->
+
+    <script type="text/javascript">
+var browser=navigator.appName
+var b_version=navigator.appVersion
+var version=b_version.split(";");
+var trim_Version=version[1].replace(/[ ]/g,"");
+if(browser=="Microsoft Internet Explorer" && trim_Version=="MSIE6.0")
+{
+alert("IE 6.0");
+}
+else if(browser=="Microsoft Internet Explorer" && trim_Version=="MSIE7.0")
+{
+alert("IE 7.0"); window.location.href="http://xxxx.com";
+}
+else if(browser=="Microsoft Internet Explorer" && trim_Version=="MSIE8.0")
+{
+alert("IE 8.0");
+}
+else if(browser=="Microsoft Internet Explorer" && trim_Version=="MSIE9.0")
+{
+// alert("IE 9.0");
+// console.log($('#txt'))
+$(function(){
+  var txtHolder=$("#txt").attr("placeholder");
+  var pwdHolder=$("#pwd").attr("placeholder");
+  var pwdSpanHolder=$("#pwdSpan").attr("placeholder");
+  $("#txt").val(txtHolder).addClass("hint");
+  $("#pwd").val(pwdHolder).addClass("hint");
+  console.log(pwdHolder)
+  console.log(pwdSpanHolder)
+  // $("#pwdSpan").val(pwdHolder).addClass("hint").show();
+  // $("#pwd").hide();
+  $("#txt").focus(function(){
+      if($(this).val() == txtHolder){
+          $(this).val("").removeClass("hint");
+      }
+  }).blur(function(){
+      if($(this).val().trim() === ""){
+          $(this).val(txtHolder).addClass("hint");
+      }
+  });
+  $("#pwd").focus(function(){
+      if($(this).val() == pwdHolder){
+          $(this).val("").removeClass("hint");
+      }
+  }).blur(function(){
+      if($(this).val().trim() === ""){
+          $(this).val(pwdSpanHolder).addClass("hint");
+      }
+  });
+  $("#pwdSpan").focus(function(){
+      if($(this).val() == pwdSpanHolder){
+          $(this).val("").removeClass("hint");
+      }
+  }).blur(function(){
+      if($(this).val().trim() === ""){
+          $(this).val(pwdSpanHolder).addClass("hint");
+      }
+  });
+
+  // $("#pwdSpan").focus(function(){
+  //     $(this).css("display", "none");
+  //     $("#pwd").show().focus();
+  // })
+  //
+  // $("#pwd").blur(function(){
+  //     if($("#pwd").val().trim() == ""){
+  //         $(this).hide();
+  //         $("#pwdSpan").show();
+  //     }
+  // })
+})
+}
+</script>
+
+</body>
+</html>

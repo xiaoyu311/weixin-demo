@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>welcome to ixiewei world</title>
+    <style type="text/css">
+        body{font:12px/1.5 "\5FAE\8F6F\96C5\9ED1","\9ED1\4F53",Helvetica,Tahoma,arial,sans-serif; margin:0 auto; color:#333;}
+        p,ul,ol,dl,dt,dd,h1,h2,h3,h4,h5,h6,form,input,select,button,textarea,iframe{margin:0; padding:0;}
+        .clearfix:after{content:".";display:block;height:0;clear: both;visibility:hidden;}
+        .clearfix{*zoom:1;}
+        .fl{ float:left;_display: inline}
+        .pr{ position:relative}
+        .abs{position:absolute;}
+
+        /*placeholder字体颜色*/
+        ::-webkit-input-placeholder { /* WebKit browsers */
+            color:    #ccc;
+        }
+        :-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+            color:    #ccc;
+        }
+        ::-moz-placeholder { /* Mozilla Firefox 19+ */
+            color:    #ccc;opacity:1
+        }
+        :-ms-input-placeholder { /* Internet Explorer 10+ */
+            color:    #ccc !important;
+        }
+        input:-webkit-autofill { /* 谷歌浏览器-文本框边框阴影遮住了背景颜色浅黄*/
+            -webkit-box-shadow: 0 0 0 1000px #ffffff inset !important;
+        }
+        .demod{width:440px;height:auto;background:#ffffff;padding-top:35px;position:relative;font-family:microsoft yahei}
+        .demod .demodin{height:40px;margin:0 37px 20px;border:1px solid #d2d6e0}
+        .demod .demodin .input_d{height:30px;margin:5px 0 0 0}
+        .demod .demodin .input_d input{height:30px;line-height:30px;width:280px;border:0;font-size:14px;font-family:microsoft yahei;color:#333;outline: none}
+        .demod .demodin .input_d label{height:30px;line-height:30px;width:280px;border:0;font-size:14px;font-family:microsoft yahei;color:#ccc;top:0;left:0;display:none}
+        .demod{width:440px;height:auto;background:#ffffff;position:relative;font-family:microsoft yahei}
+        .demod .demodin{height:40px;margin:0 37px 20px;border:1px solid #d2d6e0}
+        .demod .demodin p{height:16px;width:34px;border-right:1px solid #ddd;margin:13px 12px 0 0}
+        .demod .demodin .input_d{height:30px;margin:5px 0 0 0}
+        .demod .demodin .input_d input{height:30px;line-height:30px;width:280px;border:0;font-size:14px;font-family:microsoft yahei;color:#333;outline: none}
+        .demod .demodin .input_d label{height:30px;line-height:30px;width:280px;border:0;font-size:14px;font-family:microsoft yahei;color:#ccc;top:0;left:0;display:none}
+        .demod .demodin .input_d_pwd input{width:240px}
+        .demod .demodin .see_pwd_btn{display:block;top:10px;right:10px;cursor:pointer;height:22px}
+        .demod .demodin .see_pwd_on{color:#00AA00}
+    </style>
+</head>
+<body>
+<!--demo示例-->
+<div>
+    <div class="demod">
+        <div class="demodin clearfix pr">
+            <div class="input_d fl">
+                <input type="text" placeholder="请输入手机号" autocomplete="off"/>
+            </div>
+        </div>
+        <div class="demodin clearfix pr">
+            <div class="input_d fl pr">
+                <label class="abs"></label>
+                <input type="password" placeholder="请输入密码" autocomplete="new-password"/>
+            </div>
+        </div>
+        <div class="demodin clearfix pr">
+            <div class="input_d input_d_pwd fl pr">
+                <label class="abs"></label>
+                <input type="password" placeholder="请输入密码2" autocomplete="new-password" class="ch_reg_pwd"/>
+            </div>
+            <div class="see_pwd_btn abs">查看密码</div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="/js/jquery-1.7.2.min.js"></script>
+<script type="text/javascript">
+    $(function () {
+        //兼容不支持placeholder的浏览器[ie浏览器，并且10以下均采用替代方式处理]
+        if ((navigator.appName == "Microsoft Internet Explorer") && (document.documentMode < 10 || document.documentMode == undefined)) {
+            var $placeholder = $("input[placeholder]");  
+            for (var i = 0; i < $placeholder.length; i++) {
+                if ($placeholder.eq(i).attr("type") == "password") {
+                    $placeholder.eq(i).siblings("label").text($placeholder.eq(i).attr("placeholder")).show()
+                } else {
+                    $placeholder.eq(i).val($placeholder.eq(i).attr("placeholder")).css({"color": "#ccc"})
+                }
+            }
+            $placeholder.focus(function () {
+                if ($(this).attr("type") == "password") {
+                    $(this).siblings("label").hide()
+                } else {
+                    if ($(this).val() == $(this).attr("placeholder")) {
+                        $(this).val("").css({"color": "#333"})
+                    }
+                }
+            }).blur(function () {
+                if ($(this).attr("type") == "password") {
+                    if ($(this).val() == "") {
+                        $(this).siblings("label").text($(this).attr("placeholder")).show()
+                    }
+                } else {
+                    if ($(this).val() == "") {
+                        $(this).val($(this).attr("placeholder")).css({"color": "#ccc"})
+                    }
+                }
+            });
+            $(".clone_input_text").live("focus", function () {
+                $(this).siblings("label").hide()
+            }).live("blur", function () {
+                if ($(this).val() == "") {
+                    $(this).siblings("label").text($(this).attr("placeholder")).show()
+                }
+            });
+            $placeholder.siblings("label").click(function () {
+                if ($(this).parent("div").siblings(".see_pwd_btn").attr("data-flag") == "1") {
+                    $(this).hide().next("input").next("input").focus()
+                } else {
+                    $(this).hide().next("input").focus()
+                }
+            })
+        }
+
+        //可视密码
+        $(".see_pwd_btn").click(function() {
+            var obj=$(this);
+            var ch_reg_pwd = $(".ch_reg_pwd");
+            if (obj.attr("data-flag") != 1) {
+                var clone_input = '<input type="text" class="clone_input_text" placeholder="'+ ch_reg_pwd.attr("placeholder") + '" value="' + ch_reg_pwd.val() + '"/>';
+                ch_reg_pwd.after(clone_input);
+                ch_reg_pwd.hide();
+                obj.addClass("see_pwd_on").attr("data-flag", 1);
+            } else {
+                ch_reg_pwd.val($(".clone_input_text").val()).show();
+                $(".clone_input_text").remove();
+                obj.removeClass("see_pwd_on").attr("data-flag", "");
+            }
+        });
+    });
+</script>
+</body>
+</html>
